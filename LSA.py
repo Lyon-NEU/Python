@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun 11 17:02:39 2014
 
-@author: modified by zhouxu,add plot
 """
 
 from numpy import zeros
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.linalg import svd
-
+#test document
 titles =[
     "The Neatest Little Guide to Stock Market Investing",
     "Investing For Dummies, 4th Edition",
@@ -29,10 +27,15 @@ class LSA(object):
     def __init__(self, stopwords, ignorechars):
         self.stopwords = stopwords
         self.ignorechars = ignorechars
+        #word dictory
         self.wdict = {}
+        #documents numbers
         self.dcount = 0
 
     def parse(self, doc):
+    	'''
+    	例如，词book出现在标题3和4中，则我们有self.wdict['book']= [3, 4]。相当于建了一下倒排
+    	'''
         words = doc.split(); 
         for w in words:
             #print self.dcount
@@ -46,6 +49,11 @@ class LSA(object):
         self.dcount += 1
 
     def build(self):
+    	'''
+    	所有的文档被解析之后，所有出现的词（也就是词典的keys）被取出并且排序。
+    	建立一个矩阵，其行数是词的个数，列数是文档个数。
+    	最后，所有的词和文档对所对应的矩阵单元的值被统计出来。
+    	'''
         self.keys = [k for k in self.wdict.keys() if len(self.wdict[k]) > 1]
         self.keys.sort()
         print (self.keys)
