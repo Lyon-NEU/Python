@@ -1,21 +1,15 @@
-<<<<<<< HEAD
-#!/usr/bin/env python
-#see
-=======
->>>>>>> 2797a5abe5ee36c7d3012830b63589170322832a
 # -*- coding: utf-8 -*-
 """
+Created on Wed Jun 11 17:02:39 2014
+
 
 """
 
 from numpy import zeros
 import numpy as np
-<<<<<<< HEAD
-=======
 import matplotlib.pyplot as plt
->>>>>>> 2797a5abe5ee36c7d3012830b63589170322832a
 from scipy.linalg import svd
-#test document
+
 titles =[
     "The Neatest Little Guide to Stock Market Investing",
     "Investing For Dummies, 4th Edition",
@@ -35,15 +29,10 @@ class LSA(object):
     def __init__(self, stopwords, ignorechars):
         self.stopwords = stopwords
         self.ignorechars = ignorechars
-        #word dictory
         self.wdict = {}
-        #documents numbers
         self.dcount = 0
 
     def parse(self, doc):
-    	'''
-    	例如，词book出现在标题3和4中，则我们有self.wdict['book']= [3, 4]。相当于建了一下倒排
-    	'''
         words = doc.split(); 
         for w in words:
             #print self.dcount
@@ -57,28 +46,15 @@ class LSA(object):
         self.dcount += 1
 
     def build(self):
-    	'''
-    	所有的文档被解析之后，所有出现的词（也就是词典的keys）被取出并且排序。
-    	建立一个矩阵，其行数是词的个数，列数是文档个数。
-    	最后，所有的词和文档对所对应的矩阵单元的值被统计出来。
-    	'''
         self.keys = [k for k in self.wdict.keys() if len(self.wdict[k]) > 1]
         self.keys.sort()
-<<<<<<< HEAD
-        print(self.keys)
-=======
         print (self.keys)
->>>>>>> 2797a5abe5ee36c7d3012830b63589170322832a
         self.A = zeros([len(self.keys), self.dcount])
         for i, k in enumerate(self.keys):
             for d in self.wdict[k]:
                 self.A[i,d] += 1
     
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 2797a5abe5ee36c7d3012830b63589170322832a
     def printA(self):
         print (self.A)
         u,s,vt = svd(self.A)
@@ -98,37 +74,19 @@ class LSA(object):
         vdemention2 = vt[1]
         vdemention3 = vt[2]
         for j in range(len(vdemention2)):
-<<<<<<< HEAD
-            text(vdemention2[j],vdemention3[j],titles[j]) 
-        plot(vdemention2, vdemention3, '.')        
-        
-=======
             plt.text(vdemention2[j],vdemention3[j],titles[j])
         plt.plot(vdemention2, vdemention3, '.')        
         plt.show()
->>>>>>> 2797a5abe5ee36c7d3012830b63589170322832a
         ut = u.T
         demention2 = ut[1]
         demention3 = ut[2]
         for i in range(len(demention2)):
-<<<<<<< HEAD
-            text(demention2[i],demention3[i],self.keys[i]) 
-        plot(demention2, demention3, '.')
-        
+            plt.text(demention2[i],demention3[i],self.keys[i])
+        plt.plot(demention2, demention3, '.')
+        plt.show()
                 
 mylsa = LSA(stopwords, ignorechars)
 for t in titles:
     mylsa.parse(t)
 mylsa.build()
 mylsa.printA()
-=======
-            plt.text(demention2[i],demention3[i],self.keys[i])
-        plt.plot(demention2, demention3, '.')
-        plt.show()
-if __name__ == '__main__':
-	mylsa = LSA(stopwords, ignorechars)
-	for t in titles:
-		mylsa.parse(t)
-	mylsa.build()
-	mylsa.printA()
->>>>>>> 2797a5abe5ee36c7d3012830b63589170322832a
