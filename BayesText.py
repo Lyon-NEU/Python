@@ -79,3 +79,29 @@ class BayesText (object):
 		results=list(results.item())
 		results.sort(key=lambda tuple:tuple[1],reverse=True)
 		return results[0][0]
+	def testCategory(self,directory,category):
+		files=os.listdir(directory)
+		total=0
+		correct=0
+		for file in files:
+			total+=1
+			result=self.classify(directory+file)
+			if result == category:
+				correct+=1
+		return (correct,total)
+	def test(self,testdir):
+		"""
+		Test all fiels in the test direcotru 
+		"""
+		categories=os.listdir(testdir)
+		categories=[filename for filename in categories if os.path.isdir(testdir+filename)]
+		correct=0.0
+		total=0.0
+		for category in categories:
+			(catCorrect,catTotal)=self.testCategory(testdir+category+'/',category)
+			correct+=catCorrect
+			total+=catTotal
+		print("Accuracy is %f%% (%i test instances)" %((correct / total)*100,total)
+
+if __name__ == '__main__':
+	#main()
