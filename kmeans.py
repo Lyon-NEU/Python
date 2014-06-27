@@ -9,7 +9,7 @@ class KMeans:
 	'''
 
 	'''
-	def __init__(self,k,iternum,trainingdir):
+	def __init__(self,k,iternum,dimension,trainingdir):
 		'''
 		k: cluster numnbers
 		iternum: iter count
@@ -19,6 +19,7 @@ class KMeans:
 		self.inCenter={}    # which cluster point belong to
 		self.iternum=iternum
 		self.k=k
+		self.dimension=dimension
 		self.pointCount=0     # record how many points
 		f=open(trainingdir) 
 		for line in f.readlines():
@@ -64,6 +65,7 @@ class KMeans:
 		toChange=true  #record if center points is change
 		iterCount=1      #iter time
 		while toChange and iterCount<=self.iternum:
+			toChange=false
 			print('\nre-compute\n')
 			#compute every point's center
 			for i in range(self.pointCount):
@@ -77,7 +79,17 @@ class KMeans:
 			for i in range(k):
 				c=self.inCenter[i] #list: saved points belongs this cluster
 				#将每个维度的数据分别相加
+				new_center=[]
+				for x in c:
+					for y in range(self.dimension):
+						new_center[y]+=points[x][y]
 				#分别除以点的个数，计算平均数
+				for k in range(self.dimension):
+					new_center[k] /=len(c)
+				if !isEqual(new_center,center[i]):
+					center[i]=new_center
+					change=true
+			self.inCenter=[]
 	def printResult():
 		pass
 	if __name__ == '__main__':
