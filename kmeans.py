@@ -13,6 +13,7 @@ class KMeans:
 		'''
 		k: cluster numnbers
 		iternum: iter count
+		dimension: dimension of point
 		'''
 		self.points=[]      #all points
 		self.center=[]       #center point
