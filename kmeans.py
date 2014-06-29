@@ -53,12 +53,14 @@ class KMeans:
 			if vec1[i] != vec2[i]:
 				return false
 		return true
-	def printPoint():
-		plt.title("k-means")
-		plt.xlabel(u'dimension1')
-		plt.ylabel(u'dimension2')
-		plt.plot()
-		plt.show()
+	def printPoint(self):
+		#plt.title("k-means")
+		#plt.xlabel(u'dimension1')
+		#plt.ylabel(u'dimension2')
+		#plt.plot()
+		#plt.show()
+		#print(self.pooints)
+		pass
 	def update(self):
 		'''
 		iter until center not change or when iter iternum times
