@@ -67,14 +67,14 @@ class BayesText (object):
 		results={}
 		for category in self.categories:
 			results[category] = 0
-			f=codecs.open(filename,'r','ios8859-1')
-			for line in f:
-				tokens=line.split()
-				for token in tokens:
-					token=token.strip('\'".,?:-').lower()
-					if token in self.vocabulary:
-						for category in self.categories:
-							results[category]+=math.log(self.prob[category][token])
+		f=codecs.open(filename,'r','ios8859-1')
+		for line in f:
+			tokens=line.split()
+			for token in tokens:
+				token=token.strip('\'".,?:-').lower()
+				if token in self.vocabulary:
+					for category in self.categories:
+						results[category]+=math.log(self.prob[category][token])
 			f.close()
 		results=list(results.item())
 		results.sort(key=lambda tuple:tuple[1],reverse=True)
